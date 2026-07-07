@@ -26,16 +26,31 @@ find_cached_path() {
     CACHED_LLAMA_ARGS="-m $model_path"
 }
 
+find_mmproj_cached_path() {
+    local model_path
+    model_path=$(python ./find_cached.py "$MMPROJ_CACHED_MODEL" "$LLAMA_CACHED_GGUF_PATH")
+    if [ $? -ne 0 ] || [ -z "$model_path" ]; then
+        echo "start.sh: Error: Could not resolve cached model path. Check that MMPROJ_CACHED_MODEL and LLAMA_CACHED_GGUF_PATH are correct and the model is fully cached on the network volume."
+        exit 1
+    fi
+    CACHED_LLAMA_ARGS="${CACHED_LLAMA_ARGS} --mmproj $model_path"
+}
+
 # check if $LLAMA_CACHED_MODEL is set and not empty
 if [ -n "$LLAMA_CACHED_MODEL" ]; then
     echo "start.sh: Caching is enabled. Finding cached model path..."
     find_cached_path
 
+    # check if $MMPROJ_CACHED_MODEL is set and not empty
+    if [ -n "$MMPROJ_CACHED_MODEL" ]; then
+        echo "start.sh: MultiModal support enabled. Finding cached mmrpoj path..."
+        find_mmproj_cached_path
+    fi
     echo "start.sh: Using cached model with arguments: $CACHED_LLAMA_ARGS"
 else
     echo "start.sh: WARNING: Caching is disabled. Please visit the inference-worker README and docs to learn more."
 fi
-
+   
 # check if $LLAMA_SERVER_CMD_ARGS is set
 if [ -z "$LLAMA_SERVER_CMD_ARGS" ]; then
     echo "start.sh: Warning: LLAMA_SERVER_CMD_ARGS is not set. Defaulting to -hf unsloth/gemma-3-270m-it-GGUF:IQ2_XXS --ctx-size 512 -ngl 999"

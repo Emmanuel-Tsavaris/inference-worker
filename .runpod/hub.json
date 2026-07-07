@@ -1,6 +1,6 @@
 {
     "title": "llama.cpp",
-    "description": "Run llama.cpp inference using serverless RunPod workers!",
+    "description": "Run llama.cpp inference using serverless RunPod workers. Supports caching and multimodal models with mmproj assistant.",
     "type": "serverless",
     "category": "language",
     "iconUrl": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/media/llama1-icon-transparent.png",
@@ -27,6 +27,16 @@
                     "name": "Hugging Face Hub model name for cached model",
                     "type": "string",
                     "description": "Hugging Face Hub model name to use for the cached GGUF model. Leave empty to disable caching. Example: user/model-name",
+                    "default": "",
+                    "advanced": true
+                }
+            },
+            {
+                "key": "MMPROJ_CACHED_MODEL",
+                "input": {
+                    "name": "Hugging Face Hub model name for cached model mmproj assistant",
+                    "type": "string",
+                    "description": "Hugging Face Hub model name to use for the cached GGUF model mmproj assistant. Leave empty to disable multimodal support. Example: user/model-name",
                     "default": "",
                     "advanced": true
                 }
