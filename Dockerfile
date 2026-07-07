@@ -32,8 +32,12 @@ WORKDIR /work
 # Add ./src as /work
 ADD ./src /work
 
-# Install runpod and its dependencies
-RUN pip install -r ./requirements.txt && chmod +x /work/start.sh
+# Install runpod and its dependencies.
+# --ignore-installed avoids pip trying (and failing) to uninstall OS packages
+# such as cryptography that were installed by debian/apt into the shared
+# /usr/lib/python3/dist-packages and therefore have no RECORD file. Fresh
+# copies land in python3.11's site-packages, which takes path precedence.
+RUN pip install --ignore-installed -r ./requirements.txt && chmod +x /work/start.sh
 
 # Set the entrypoint
 ENTRYPOINT ["/bin/sh", "-c", "/work/start.sh"]
