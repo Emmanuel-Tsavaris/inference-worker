@@ -15,7 +15,7 @@ Streaming responses is also supported.
 
 **Important!** This project is still relatively new. Please [open a new issue](https://github.com/Jacob-ML/inference-worker/issues/new) if you encounter any problems in order to get help.
 
-**This is a fork of [SvenBrnn's `runpod-worker-ollama`](https://github.com/SvenBrnn/runpod-worker-ollama).**
+**This is a fork of [Jacob-ML's fork of](https://github.com/Jacob-ML/inference-worker) [SvenBrnn's `runpod-worker-ollama`](https://github.com/SvenBrnn/runpod-worker-ollama).**
 
 ## Setup
 
@@ -31,5 +31,3 @@ The worker can be configured via environment variables set in the RunPod hub con
 ## License
 
 Please see the [LICENSE](./LICENSE) file for more information.
-
-[![Runpod badge](https://api.runpod.io/badge/Jacob-ML/inference-worker)](https://console.runpod.io/hub/Jacob-ML/inference-worker)
