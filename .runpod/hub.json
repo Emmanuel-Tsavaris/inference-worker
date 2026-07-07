@@ -32,11 +32,11 @@
                 }
             },
             {
-                "key": "MMPROJ_CACHED_MODEL",
+                "key": "MMPROJ_CACHED_GGUF_PATH",
                 "input": {
-                    "name": "Hugging Face Hub model name for cached model mmproj assistant",
+                    "name": "Hugging Face Hub file path for cached model mmproj assistant",
                     "type": "string",
-                    "description": "Hugging Face Hub model name to use for the cached GGUF model mmproj assistant. Leave empty to disable multimodal support. Example: user/model-name",
+                    "description": "Hugging Face Hub file path to use for the cached GGUF model mmproj assistant. Leave empty to disable multimodal support. Example: user/model-name/model.gguf",
                     "default": "",
                     "advanced": true
                 }

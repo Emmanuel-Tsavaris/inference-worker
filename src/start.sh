@@ -28,7 +28,7 @@ find_cached_path() {
 
 find_mmproj_cached_path() {
     local model_path
-    model_path=$(python ./find_cached.py "$MMPROJ_CACHED_MODEL" "$LLAMA_CACHED_GGUF_PATH")
+    model_path=$(python ./find_cached.py "$LLAMA_CACHED_MODEL" "$MMPROJ_CACHED_GGUF_PATH")
     if [ $? -ne 0 ] || [ -z "$model_path" ]; then
         echo "start.sh: Error: Could not resolve cached model path. Check that MMPROJ_CACHED_MODEL and LLAMA_CACHED_GGUF_PATH are correct and the model is fully cached on the network volume."
         exit 1
@@ -42,7 +42,7 @@ if [ -n "$LLAMA_CACHED_MODEL" ]; then
     find_cached_path
 
     # check if $MMPROJ_CACHED_MODEL is set and not empty
-    if [ -n "$MMPROJ_CACHED_MODEL" ]; then
+    if [ -n "$MMPROJ_CACHED_GGUF_PATH" ]; then
         echo "start.sh: MultiModal support enabled. Finding cached mmrpoj path..."
         find_mmproj_cached_path
     fi
