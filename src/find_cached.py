@@ -20,7 +20,7 @@ def find_model_path(model_name, gguf_in_repo="model.gguf"):
         The full path to the cached model, or None if not found
     """
 
-    cache_name = model_name.replace("/", "--").lower()
+    cache_name = model_name.replace("/", "--")
     snapshots_dir = os.path.join(
         CACHE_DIR, f"models--{cache_name}", "snapshots"
     )
