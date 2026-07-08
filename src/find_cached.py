@@ -24,7 +24,7 @@ def find_model_path(model_name, gguf_in_repo="model.gguf"):
     snapshots_dir = os.path.join(
         CACHE_DIR, f"models--{cache_name}", "snapshots"
     )
-
+    print(f"Snapshots dir: {snapshots_dir}")
     if os.path.exists(snapshots_dir):
         snapshots = os.listdir(snapshots_dir)
 
