@@ -19,19 +19,21 @@ def find_model_path(model_name, gguf_in_repo="model.gguf"):
     Returns:
         The full path to the cached model, or None if not found
     """
+    try:
+        org, name = model_name.split("/", 1)
+        model_root = os.path.join(CACHE_DIR, f"models--{org}--{name}")
+        snapshots_dir = os.path.join(model_root, "snapshots")
 
-    cache_name = model_name.replace("/", "--").lower()
-    snapshots_dir = os.path.join(
-        CACHE_DIR, f"models--{cache_name}", "snapshots"
-    )
-    print(f"Snapshots dir: {snapshots_dir}")
-    if os.path.exists(snapshots_dir):
-        snapshots = os.listdir(snapshots_dir)
+        
+        if os.path.isdir(snapshots_dir):
+            snapshots = os.listdir(snapshots_dir)
 
-        if snapshots:
-            return os.path.join(snapshots_dir, snapshots[0], gguf_in_repo)
+            if snapshots:
+                return os.path.join(snapshots_dir, snapshots[0], gguf_in_repo)
 
-    return None
+        return None
+    except Exception as e:
+        raise f"Error: There was a problem parsing the directory: {e}"
 
 
 def main():
